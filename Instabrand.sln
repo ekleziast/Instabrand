@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand", "Instabrand\Instabrand.csproj", "{D9E46953-22B5-4173-9A80-01C24E220150}"
+	ProjectSection(ProjectDependencies) = postProject
+		{844DDC24-683D-4E8C-B862-FE3A08146617} = {844DDC24-683D-4E8C-B862-FE3A08146617}
+		{B3EDBC48-1A01-45C1-9987-342232FB7F83} = {B3EDBC48-1A01-45C1-9987-342232FB7F83}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.Domain", "Instabrand.Domain\Instabrand.Domain.csproj", "{B3EDBC48-1A01-45C1-9987-342232FB7F83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.Infrastructure", "Instabrand.Infrastructure\Instabrand.Infrastructure.csproj", "{844DDC24-683D-4E8C-B862-FE3A08146617}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.DatabaseMigrations", "Instabrand.DatabaseMigrations\Instabrand.DatabaseMigrations.csproj", "{AB9CB2A3-B5ED-4482-9FDE-59B91060F046}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9E46953-22B5-4173-9A80-01C24E220150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E46953-22B5-4173-9A80-01C24E220150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E46953-22B5-4173-9A80-01C24E220150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E46953-22B5-4173-9A80-01C24E220150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3EDBC48-1A01-45C1-9987-342232FB7F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3EDBC48-1A01-45C1-9987-342232FB7F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3EDBC48-1A01-45C1-9987-342232FB7F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3EDBC48-1A01-45C1-9987-342232FB7F83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844DDC24-683D-4E8C-B862-FE3A08146617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844DDC24-683D-4E8C-B862-FE3A08146617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844DDC24-683D-4E8C-B862-FE3A08146617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844DDC24-683D-4E8C-B862-FE3A08146617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB9CB2A3-B5ED-4482-9FDE-59B91060F046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9CB2A3-B5ED-4482-9FDE-59B91060F046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9CB2A3-B5ED-4482-9FDE-59B91060F046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9CB2A3-B5ED-4482-9FDE-59B91060F046}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1AAD336A-9238-41F6-8D8F-BF044C6F23B8}
+	EndGlobalSection
+EndGlobal
