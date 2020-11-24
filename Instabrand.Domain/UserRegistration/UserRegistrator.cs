@@ -23,7 +23,8 @@ namespace Instabrand.Domain.UserRegistration
             string confirmationCode = _confirmationCodeProvider.Generate(email);
 
             var user = new User(id, email, passwordHash);
-
+            
+            // Warning: Confirmation code sending before user saved in db
             _confirmationCodeSender.Send(email, confirmationCode);
 
             return user;
