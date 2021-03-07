@@ -18,7 +18,6 @@ namespace Instabrand.Shared.Infrastructure.CQRS
             foreach (var handler in queryHandlerRegistry.Handlers)
             {
                 services.AddScoped(handler);
-                System.Diagnostics.Debug.WriteLine($"{handler.Name}");
             }
             services.AddScoped<IQueryProcessor, QueryProcessor>();
         }
