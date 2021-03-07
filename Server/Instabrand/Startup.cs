@@ -29,10 +29,8 @@ namespace Instabrand
             {
                 c.BaseAddress = new System.Uri("https://www.instagram.com/");
             });
-
-            System.Diagnostics.Debug.WriteLine(services.Count);
-            services.AddQueryHandlers<Queries.Infrastructure.Samples.SampleQueryHandler>();
-            System.Diagnostics.Debug.WriteLine(services.Count);
+            
+            services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

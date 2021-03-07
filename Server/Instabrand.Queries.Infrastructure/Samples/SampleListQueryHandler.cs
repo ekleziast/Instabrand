@@ -2,8 +2,6 @@
 using Instabrand.Shared.Infrastructure.CQRS;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,9 +9,9 @@ namespace Instabrand.Queries.Infrastructure.Samples
 {
     public sealed class SampleListQueryHandler : IQueryHandler<SampleListQuery, Page<SampleListItemView>>
     {
-        public async Task<Page<SampleListItemView>> HandleAsync(SampleListQuery query, CancellationToken cancellationToken)
+        public async Task<Page<SampleListItemView>> Handle(SampleListQuery query, CancellationToken cancellationToken)
         {
-            var ownerId = Guid.NewGuid();
+            var ownerId = new Guid("f8504337-b7e1-433a-8d0f-cbfedbe879bc");
 
             var items = new List<SampleListItemView>
             {

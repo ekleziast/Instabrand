@@ -23,6 +23,6 @@ namespace Instabrand.Shared.Infrastructure.CQRS
         /// Выполнение запроса
         /// </summary>
         /// <param name="query">Запрос</param>
-        Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken);
+        public Task<TResult> Handle(TQuery query, CancellationToken cancellationToken);
     }
 }
