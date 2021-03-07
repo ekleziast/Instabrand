@@ -1,3 +1,4 @@
+using Instabrand.Extensions;
 using Instabrand.Shared.Infrastructure.CQRS;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,10 +21,7 @@ namespace Instabrand
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instabrand", Version = "v1" });
-            });
+            services.AddSwagger();
 
             services.AddHttpClient<Domain.IInstragramService, Infrastructure.Instagram.InstagramService>(c =>
             {

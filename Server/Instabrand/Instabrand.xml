@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Instabrand</name>
+    </assembly>
+    <members>
+        <member name="M:Instabrand.Controllers.SamplesController.GetSample(System.Guid,Instabrand.Shared.Infrastructure.CQRS.IQueryProcessor,System.Threading.CancellationToken)">
+            <summary>
+            Get sample details
+            </summary>
+            <param name="id">Sample identifier</param>
+        </member>
+    </members>
+</doc>

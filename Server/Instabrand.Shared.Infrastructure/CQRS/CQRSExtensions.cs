@@ -2,7 +2,7 @@
 
 namespace Instabrand.Shared.Infrastructure.CQRS
 {
-    public static class CQRSServiceCollectionExtensions
+    public static class CQRSExtensions
     {
         /// <summary>
         /// Add CQRS query processor
