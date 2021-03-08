@@ -2,6 +2,7 @@
 using Instabrand.Shared.Infrastructure.CQRS;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace Instabrand.Queries.Infrastructure.Samples
         {
             var ownerId = new Guid("f8504337-b7e1-433a-8d0f-cbfedbe879bc");
 
-            var items = new List<SampleListItemView>
+            var testData = new List<SampleListItemView>
             {
                 new SampleListItemView
                     {
@@ -35,12 +36,18 @@ namespace Instabrand.Queries.Infrastructure.Samples
                     }
             };
 
+            var items = testData
+                .Where(o => o.OwnerId == query.OwnerId)
+                .AsQueryable();
+
             return new Page<SampleListItemView>
             {
                 Limit = query.Limit,
                 Offset = query.Offset,
-                Total = items.Count,
+                Total = items.Count(),
                 Items = items
+                    .Skip(query.Offset)
+                    .Take(query.Limit)
             };
         }
     }
