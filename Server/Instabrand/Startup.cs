@@ -22,11 +22,6 @@ namespace Instabrand
         {
             services.AddControllers();
             services.AddSwagger();
-
-            services.AddHttpClient<Domain.IInstragramService, Infrastructure.Instagram.InstagramService>(c =>
-            {
-                c.BaseAddress = new System.Uri("https://www.instagram.com/");
-            });
             
             services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
         }

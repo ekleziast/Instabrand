@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="2.10.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
@@ -17,6 +16,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Instabrand.Domain\Instabrand.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Instagram\" />
   </ItemGroup>
 
 </Project>
