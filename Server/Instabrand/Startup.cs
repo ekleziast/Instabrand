@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Instabrand.Extensions;
 using Instabrand.Shared.Infrastructure.CQRS;
 using Microsoft.AspNetCore.Builder;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
 
 namespace Instabrand
 {
@@ -19,10 +21,31 @@ namespace Instabrand
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            var npgsqlConnectionString = Configuration.GetConnectionString("Instabrand");
+
+            services
+                .AddControllers()
+                .AddFluentValidation(configuration =>
+                {
+                    configuration.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    configuration.LocalizationEnabled = false;
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
+
             services.AddSwagger();
             
             services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
+
+            #region DatabaseMigrations
+
+            services.AddNpgsqlDbContext<DatabaseMigrations.InstabrandDbContext>(npgsqlConnectionString);
+
+            #endregion
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

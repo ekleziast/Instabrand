@@ -13,11 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instabrand.Domain", "Instab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instabrand.Infrastructure", "Instabrand.Infrastructure\Instabrand.Infrastructure.csproj", "{844DDC24-683D-4E8C-B862-FE3A08146617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.Shared.Infrastructure", "Instabrand.Shared.Infrastructure\Instabrand.Shared.Infrastructure.csproj", "{29EB5D93-9A82-4E7E-8E7A-FFF9BDAA0005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instabrand.Shared.Infrastructure", "Instabrand.Shared.Infrastructure\Instabrand.Shared.Infrastructure.csproj", "{29EB5D93-9A82-4E7E-8E7A-FFF9BDAA0005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.Queries", "Instabrand.Queries\Instabrand.Queries.csproj", "{0DE0B006-2598-4EF2-85DD-D5B97BE8F3E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instabrand.Queries", "Instabrand.Queries\Instabrand.Queries.csproj", "{0DE0B006-2598-4EF2-85DD-D5B97BE8F3E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.Queries.Infrastructure", "Instabrand.Queries.Infrastructure\Instabrand.Queries.Infrastructure.csproj", "{7D3E99FB-0948-4BB1-9505-204096CE1F7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instabrand.Queries.Infrastructure", "Instabrand.Queries.Infrastructure\Instabrand.Queries.Infrastructure.csproj", "{7D3E99FB-0948-4BB1-9505-204096CE1F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instabrand.DatabaseMigrations", "Instabrand.DatabaseMigrations\Instabrand.DatabaseMigrations.csproj", "{C4B8295E-D2CC-47A3-99B7-81F43748B078}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{7D3E99FB-0948-4BB1-9505-204096CE1F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D3E99FB-0948-4BB1-9505-204096CE1F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D3E99FB-0948-4BB1-9505-204096CE1F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B8295E-D2CC-47A3-99B7-81F43748B078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B8295E-D2CC-47A3-99B7-81F43748B078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B8295E-D2CC-47A3-99B7-81F43748B078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B8295E-D2CC-47A3-99B7-81F43748B078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

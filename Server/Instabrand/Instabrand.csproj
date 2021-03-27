@@ -15,13 +15,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.4" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Instabrand.DatabaseMigrations\Instabrand.DatabaseMigrations.csproj" />
     <ProjectReference Include="..\Instabrand.Domain\Instabrand.Domain.csproj" />
     <ProjectReference Include="..\Instabrand.Infrastructure\Instabrand.Infrastructure.csproj" />
     <ProjectReference Include="..\Instabrand.Queries.Infrastructure\Instabrand.Queries.Infrastructure.csproj" />
