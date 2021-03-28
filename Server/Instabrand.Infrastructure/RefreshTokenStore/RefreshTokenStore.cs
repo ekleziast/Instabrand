@@ -27,10 +27,10 @@ namespace Instabrand.Infrastructure.RefreshTokenStore
             return refreshToken.Id;
         }
 
-        public async Task ExpireAllTokens(Guid cameraOwnerId, CancellationToken cancellationToken)
+        public async Task ExpireAllTokens(Guid userId, CancellationToken cancellationToken)
         {
             var activeRefreshTokens = await _context.RefreshTokens
-                .Where(o => o.UserId == cameraOwnerId)
+                .Where(o => o.UserId == userId)
                 .Where(o => o.Expire > DateTime.UtcNow)
                 .ToListAsync(cancellationToken);
 

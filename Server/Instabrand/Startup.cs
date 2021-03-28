@@ -60,7 +60,11 @@ namespace Instabrand
 
             #endregion
 
+            #region QueryHandlers
+
             services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
+
+            #endregion
 
             #region DatabaseMigrations
 
