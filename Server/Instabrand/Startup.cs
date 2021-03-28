@@ -38,7 +38,28 @@ namespace Instabrand
                 });
 
             services.AddSwagger();
-            
+
+            #region Authentication and Authorization
+
+            services.AddScoped<Domain.Authentication.IRefreshTokenStore, Infrastructure.RefreshTokenStore.RefreshTokenStore>();
+
+            #endregion
+
+            #region Registration
+
+            services.AddScoped<Domain.Registration.UserRegistrationService>();
+            services.AddScoped<Domain.Registration.IUserRepository, Infrastructure.Registration.UserRepository>();
+            services.AddScoped<Domain.Registration.IPasswordHasher, Infrastructure.PasswordHasher.PasswordHasher>();
+            services.AddNpgsqlDbContextPool<Infrastructure.Registration.UsersDbContext>(npgsqlConnectionString);
+
+            #endregion
+
+            #region RefreshTokenStore
+
+            services.AddNpgsqlDbContextPool<Infrastructure.RefreshTokenStore.RefreshTokenStoreDbContext>(npgsqlConnectionString);
+
+            #endregion
+
             services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
 
             #region DatabaseMigrations
