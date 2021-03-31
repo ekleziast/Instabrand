@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Instabrand.Infrastructure.Registration
 {
-    public sealed class UsersDbContext : DbContext
+    public sealed class RegistrationDbContext : DbContext
     {
-        public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options) { }
+        public RegistrationDbContext(DbContextOptions<RegistrationDbContext> options) : base(options) { }
 
         internal DbSet<User> Users { get; set; }
 

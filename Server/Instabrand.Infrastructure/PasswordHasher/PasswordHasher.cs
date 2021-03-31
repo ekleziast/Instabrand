@@ -2,7 +2,8 @@
 
 namespace Instabrand.Infrastructure.PasswordHasher
 {
-    public sealed class PasswordHasher : Domain.Registration.IPasswordHasher
+    public sealed class PasswordHasher : Domain.Authentication.IPasswordHasher,
+                                         Domain.Registration.IPasswordHasher
     {
         private sealed class User { }
 

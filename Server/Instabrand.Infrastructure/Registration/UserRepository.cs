@@ -7,9 +7,9 @@ namespace Instabrand.Infrastructure.Registration
 {
     public sealed class UserRepository : IUserRepository
     {
-        private readonly UsersDbContext _context;
+        private readonly RegistrationDbContext _context;
 
-        public UserRepository(UsersDbContext context)
+        public UserRepository(RegistrationDbContext context)
         {
             _context = context;
         }
