@@ -95,6 +95,10 @@ namespace Instabrand
             services.AddScoped<Domain.Registration.IPasswordHasher, Infrastructure.PasswordHasher.PasswordHasher>();
             services.AddNpgsqlDbContextPool<Infrastructure.Registration.RegistrationDbContext>(npgsqlConnectionString);
 
+
+            services.AddScoped<Domain.Registration.IConfirmationCodeProvider, Infrastructure.ConfirmationCodeProvider.ConfirmationCodeProvider>();
+            services.Configure<Infrastructure.ConfirmationCodeProvider.ConfirmationCodeProviderOptions>(Configuration.GetSection("ConfirmationCode"));
+
             #endregion
 
             #region RefreshTokenStore

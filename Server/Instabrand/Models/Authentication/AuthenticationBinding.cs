@@ -35,7 +35,7 @@ namespace Instabrand.Models.Authentication
         public AuthenticationBindingValidator()
         {
             RuleFor(o => o.GrantType)
-                .NotEmpty();
+                .NotNull();
 
             RuleFor(o => o.UserName)
                 .NotEmpty()
