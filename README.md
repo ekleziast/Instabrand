@@ -2,8 +2,10 @@
 
 * [Server](/Server) - Backend на .NET 5.0
 * [PostgreSQL](/Postgres) - PostgreSQL база данных
-## Run database:
+
+## Run:
 ```
-docker-compose -f docker-compose.yml up --no-start
-docker-compose -f docker-compose.yml start
+cd Docker
+docker-compose pull
+docker-compose up -d
 ```
