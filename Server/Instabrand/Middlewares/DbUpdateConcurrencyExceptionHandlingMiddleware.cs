@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +43,15 @@ namespace Instabrand.Middlewares
                     continue;
                 }
             } while (true);
+        }
+    }
+    internal static class DbUpdateConcurrencyExceptionHandlingMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseDbConcurrencyExceptionHandling(this IApplicationBuilder app)
+        {
+            if (app == null) throw new ArgumentNullException(nameof(app));
+
+            return app.UseMiddleware<DbUpdateConcurrencyExceptionHandlingMiddleware>();
         }
     }
 }

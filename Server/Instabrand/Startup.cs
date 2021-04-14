@@ -1,14 +1,17 @@
 using FluentValidation.AspNetCore;
 using Instabrand.Extensions;
+using Instabrand.Middlewares;
 using Instabrand.Shared.Infrastructure.CQRS;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.Net;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -125,20 +128,28 @@ namespace Instabrand
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Instabrand v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseAspNetCorePathBase();
+
+            app.UseRequestResponseLogging();
+
+            app.UseDbConcurrencyExceptionHandling();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapSwagger("{documentName}/swagger.json");
+                endpoints.MapHealthChecks("hc");
             });
+
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("../v1/swagger.json", "Boxis Api v1"); });
+
+            app.UseRewriter(new RewriteOptions().AddRedirect(@"^$", "swagger", (int)HttpStatusCode.Redirect));
+
         }
     }
 }
