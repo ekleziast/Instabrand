@@ -28,7 +28,7 @@ namespace Instabrand
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var npgsqlConnectionString = Configuration.GetConnectionString("Instabrand");
+            var npgsqlConnectionString = Configuration.GetConnectionString("Boxis");
 
             services
                 .AddControllers()
@@ -45,6 +45,10 @@ namespace Instabrand
                 });
 
             services.AddSwagger();
+
+
+            services.AddHealthChecks()
+                .AddNpgSql(npgsqlConnectionString);
 
             #region Authentication and Authorization
 
