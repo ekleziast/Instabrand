@@ -1,0 +1,28 @@
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+
+#__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: $gray-100;
+    overflow-x: hidden;
+}
+
+.btn {
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+// components
+@import './components/Carousel.scss';
+@import './components/SitePost.scss';
+@import './components/Modal.scss';
+
+// layouts
+@import './layouts/SiteLayout.scss';
+
+// pages
+@import './pages/404.scss';
