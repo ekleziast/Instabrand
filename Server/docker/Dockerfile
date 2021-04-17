@@ -1,15 +1,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y procps
-
-
 COPY ./build /app
 
 WORKDIR /app
-
-RUN apt-get update && apt-get install -y curl
 
 HEALTHCHECK \
     --interval=30s \
