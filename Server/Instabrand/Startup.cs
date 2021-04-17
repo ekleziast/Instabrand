@@ -1,4 +1,4 @@
-using FluentValidation.AspNetCore;
+ using FluentValidation.AspNetCore;
 using Instabrand.Extensions;
 using Instabrand.Middlewares;
 using Instabrand.Shared.Infrastructure.CQRS;
@@ -31,7 +31,10 @@ namespace Instabrand
             var npgsqlConnectionString = Configuration.GetConnectionString("Boxis");
 
             services
-                .AddControllers()
+                .AddControllers(options =>
+                {
+                    options.EnableEndpointRouting = false;
+                })
                 .AddFluentValidation(configuration =>
                 {
                     configuration.RegisterValidatorsFromAssemblyContaining<Startup>();
@@ -150,7 +153,8 @@ namespace Instabrand
                 endpoints.MapHealthChecks("hc");
             });
 
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("../v1/swagger.json", "Boxis Api v1"); });
+            app.UseSwagger(options => { options.RouteTemplate = "{documentName}/swagger.json"; });
+            app.UseSwaggerUI(options => { options.SwaggerEndpoint("../v1/swagger.json", "Boxis Api v1"); });
 
             app.UseRewriter(new RewriteOptions().AddRedirect(@"^$", "swagger", (int)HttpStatusCode.Redirect));
 

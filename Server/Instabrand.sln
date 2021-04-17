@@ -24,6 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0A66164-E895-4CE3-852A-577C34B2A33E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Instabrand\docker\Dockerfile = Instabrand\docker\Dockerfile
 	EndProjectSection
 EndProject
 Global

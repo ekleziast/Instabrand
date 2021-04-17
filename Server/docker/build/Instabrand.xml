@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Instabrand</name>
+    </assembly>
+    <members>
+        <member name="M:Instabrand.Controllers.AuthenticationController.Authentication(System.Threading.CancellationToken,Instabrand.Models.Authentication.AuthenticationBinding,Instabrand.Domain.Authentication.UserAuthenticationService)">
+            <summary>
+            User authentication
+            </summary>
+            <param name="binding">Authentication model</param>
+            <response code="200">Successfully</response>
+            <response code="400">Bad request</response>
+        </member>
+        <member name="M:Instabrand.Controllers.RegistrationController.Registration(System.Threading.CancellationToken,Instabrand.Models.Registration.RegistrationBinding,Instabrand.Domain.Registration.IUserRepository,Instabrand.Domain.Registration.UserRegistrationService)">
+            <summary>
+            Register user
+            </summary>
+            <param name="binding">Registration model</param>
+            <response code="204">Successfully</response>
+            <response code="400">Invalid registration parameters format</response>
+            <response code="409">User with that email already registered</response>
+        </member>
+        <member name="M:Instabrand.Controllers.RegistrationController.Confirm(System.Threading.CancellationToken,Instabrand.Models.Registration.RegistrationConfirmationBinding,Instabrand.Domain.Registration.IUserRepository,Instabrand.Domain.Registration.IConfirmationCodeProvider)">
+            <summary>
+            Confirm user email
+            </summary>
+            <param name="binding">Confirmation model</param>
+            <response code="204">Successfully</response>
+            <response code="404">Email not found</response>
+            <response code="422">Wrong confirmation code</response>
+        </member>
+        <member name="M:Instabrand.Controllers.RegistrationController.ResendConfirmationCodeForFaceterCustomer(System.Threading.CancellationToken,System.String,Instabrand.Domain.Registration.IUserRepository,Instabrand.Domain.Registration.IConfirmationCodeProvider)">
+            <summary>
+            Get email confirmation code (temporary method)
+            </summary>
+            <response code="204">Successfully</response>
+            <response code="400">Email must be not empty</response>
+            <response code="404">Email not found</response>
+            <response code="422">Email does not require confirmation</response>
+        </member>
+        <member name="M:Instabrand.Controllers.SamplesController.GetSample(System.Threading.CancellationToken,System.Guid,Instabrand.Shared.Infrastructure.CQRS.IQueryProcessor)">
+            <summary>
+            Get sample details
+            </summary>
+            <param name="id">Sample identifier</param>
+        </member>
+        <member name="M:Instabrand.Controllers.SamplesController.GetSample(System.Threading.CancellationToken,Instabrand.Shared.Infrastructure.CQRS.IQueryProcessor,System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Get samples list
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.AuthenticationBinding.GrantType">
+            <summary>
+            Grant type
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.AuthenticationBinding.UserName">
+            <summary>
+            Email (grant_type == password)
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.AuthenticationBinding.Password">
+            <summary>
+            Password (grant_type == password)
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.AuthenticationBinding.RefreshToken">
+            <summary>
+            Refresh token (grant_type == refresh_token)
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.ErrorView.Error">
+            <summary>
+            Error code https://tools.ietf.org/html/rfc6749#section-5.2
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.ErrorView.ErrorDescription">
+            <summary>
+            Human-readable text providing additional information
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.TokenView.AccessToken">
+            <summary>
+            The access token issued by the authorization server
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.TokenView.TokenType">
+            <summary>
+            The type of the token issued. Example: Bearer 
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.TokenView.ExpiresIn">
+            <summary>
+            The lifetime in seconds of the access token
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Authentication.TokenView.RefreshToken">
+            <summary>
+            The refresh token, which can be used to obtain new  access tokens using the same authorization grant
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Registration.RegistrationBinding.Email">
+            <summary>
+            User email
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Registration.RegistrationBinding.Password">
+            <summary>
+            User password
+            </summary>
+        </member>
+        <member name="P:Instabrand.Models.Registration.RegistrationConfirmationBinding.ConfirmationCode">
+            <summary>
+            User confirmation code from email
+            </summary>
+        </member>
+    </members>
+</doc>
