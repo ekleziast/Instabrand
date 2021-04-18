@@ -1,81 +1,70 @@
 version: '3.6'
 
 services:
-#  boxis-webapi:
-#    image: ekleziast56/boxis:latest
-#    volumes:
-#      - /docker-data/boxis/logs/webapi/:/app/logs
-#    environment:
-#      - ConnectionStrings:Boxis=Server=boxis-postgresdb;Port=5432;Database=${POSTGRES_DB};User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};
-#      - Auth__UserJwt__Issuer=${USERJWT_ISSUER:-Boxis.Api}
-#      - Auth__UserJwt__Audience=${USERJWT_AUDIENCE:-Boxis}
-#      - Auth__UserJwt__SecretKey=${USERJWT_SECRETKEY:-62039d6a-a515-4119-8dbe-7840cc2fc07c}
-#      - Auth__UserJwt__LifeTimeMinutes=${USERJWT_LIFETIMEMINUTES:-30}
-#      - ConfirmationCode__SecretKey=${CONFIRMATIONCODE_SECRETKEY:-0ef38915-2e32-4450-a514-44cd1e65621d}
-#      - ConfirmationCode__LifeTimeCodeInMinute=${CONFIRMATIONCODE_LIFETIMECODEINMINUTE:-30}
-#    depends_on:
-#      - boxis-postgresdb
-#    restart: always
-#
-#  boxis-client:
-#    image: ekleziast56/boxis-client:latest
-#    restart: always
-
-#  boxis-proxy:
-#    image: nginx:1.17.4-alpine
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    volumes:
-#      - /docker-data/boxis/logs/proxy/:/var/log/nginx
-#      - ./nginx/boxis.conf:/etc/nginx/conf.d/default.conf
-#      - ./nginx/boxis-upstreams/api.conf:/etc/nginx/conf.d/boxis-upstreams/api.conf
-#      - ./nginx/boxis-locations/api.conf:/etc/nginx/conf.d/boxis-locations/api.conf
-#      - ./nginx/boxis-upstreams/client.conf:/etc/nginx/conf.d/boxis-upstreams/client.conf
-#      - ./nginx/boxis-locations/client.conf:/etc/nginx/conf.d/boxis-locations/client.conf
-#    depends_on:
-#      - boxis-webapi
-#      - boxis-client
-#    restart: always
-
-
-  web: 
-    image: nginx:latest
+  boxis-webapi:
+    image: ekleziast56/boxis:latest
+    volumes:
+      - /docker-data/boxis/logs/webapi/:/app/logs
+    environment:
+      - ConnectionStrings:Boxis=Server=boxis-postgresdb;Port=5432;Database=${POSTGRES_DB};User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};
+      - Auth__UserJwt__Issuer=${USERJWT_ISSUER:-Boxis.Api}
+      - Auth__UserJwt__Audience=${USERJWT_AUDIENCE:-Boxis}
+      - Auth__UserJwt__SecretKey=${USERJWT_SECRETKEY:-62039d6a-a515-4119-8dbe-7840cc2fc07c}
+      - Auth__UserJwt__LifeTimeMinutes=${USERJWT_LIFETIMEMINUTES:-30}
+      - ConfirmationCode__SecretKey=${CONFIRMATIONCODE_SECRETKEY:-0ef38915-2e32-4450-a514-44cd1e65621d}
+      - ConfirmationCode__LifeTimeCodeInMinute=${CONFIRMATIONCODE_LIFETIMECODEINMINUTE:-30}
+    depends_on:
+      - boxis-postgresdb
     restart: always
-    volumes:
-        - ./public:/var/www/html
-        - ./conf.d:/etc/nginx/conf.d
-        - ./certbot/conf:/etc/nginx/ssl
-        - ./certbot/data:/var/www/certbot
+    networks:
+      - backend-network
+      - postgres-network
+      - frontend-network
+
+  boxis-client:
+    image: ekleziast56/boxis-client:latest
+    restart: always
+    networks:
+      - frontend-network
+
+  boxis-proxy:
+    image: nginx:1.17.4-alpine
     ports:
-        - 80:80
-        - 443:443
-
-  certbot:
-    image: certbot/certbot:latest
-    command: certonly --webroot --webroot-path=/var/www/certbot --email admin@boxis.io --agree-tos --no-eff-email -d boxis.io -d www.boxis.io
+      - "80:80"
+      - "443:443"
     volumes:
-        - ./certbot/conf:/etc/letsencrypt
-        - ./certbot/logs:/var/log/letsencrypt
-        - ./certbot/data:/var/www/certbot
+      - /docker-data/boxis/logs/proxy/:/var/log/nginx
+      - ./nginx/boxis.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/boxis-upstreams/api.conf:/etc/nginx/conf.d/boxis-upstreams/api.conf
+      - ./nginx/boxis-locations/api.conf:/etc/nginx/conf.d/boxis-locations/api.conf
+      - ./nginx/boxis-upstreams/client.conf:/etc/nginx/conf.d/boxis-upstreams/client.conf
+      - ./nginx/boxis-locations/client.conf:/etc/nginx/conf.d/boxis-locations/client.conf
+    depends_on:
+      - boxis-webapi
+      - boxis-client
+    restart: always
+    networks: 
+      - frontend-network
 
-#  boxis-postgresdb:
-#    build:
-#        context: ./postgres
-#        dockerfile: db.Dockerfile
-#    image: postgres:12.0-alpine
-#    ports:
-#      - "5432:5432"
-#    volumes:
-#      - ./postgres/postgresql.conf:/var/lib/postgresql/boxis/data/postgresql.conf
-#      - boxis-pgdata:/var/lib/postgresql/boxis/data
-#      - boxis-pglogs:/var/log/postgresql/boxis
-#    environment:
-#      - POSTGRES_DB=${POSTGRES_DB}
-#      - POSTGRES_USER=${POSTGRES_USER}
-#      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#      - PGDATA=/var/lib/postgresql/data/boxis-db
-#    restart: always
+  boxis-postgresdb:
+    build:
+        context: ./postgres
+        dockerfile: db.Dockerfile
+    image: postgres:12.0-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/postgresql.conf:/var/lib/postgresql/boxis/data/postgresql.conf
+      - boxis-pgdata:/var/lib/postgresql/boxis/data
+      - boxis-pglogs:/var/log/postgresql/boxis
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/boxis-db
+    restart: always
+    networks:
+      - postgres-network
 
 volumes:
   boxis-data:
@@ -84,3 +73,8 @@ volumes:
     driver: local
   boxis-pglogs:
     driver: local
+
+networks:
+  backend-network:
+  frontend-network:
+  postgres-network:
