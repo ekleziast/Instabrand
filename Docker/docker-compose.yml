@@ -25,6 +25,7 @@ services:
     image: nginx:1.17.4-alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /docker-data/boxis/logs/proxy/:/var/log/nginx
       - ./nginx/boxis.conf:/etc/nginx/conf.d/default.conf
@@ -36,6 +37,14 @@ services:
       - boxis-webapi
       - boxis-client
     restart: always
+
+  certbot:
+    image: certbot/certbot:latest
+    command: certonly --webroot --webroot-path=/var/www/certbot --email admin@boxis.io --agree-tos --no-eff-email -d boxis.io -d www.boxis.io
+    volumes:
+        - ./certbot/conf:/etc/letsencrypt
+        - ./certbot/logs:/var/log/letsencrypt
+        - ./certbot/data:/var/www/certbot
 
   boxis-postgresdb:
     build:
