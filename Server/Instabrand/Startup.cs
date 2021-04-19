@@ -110,6 +110,14 @@ namespace Instabrand
             services.AddScoped<Domain.Registration.IConfirmationCodeProvider, Infrastructure.ConfirmationCodeProvider.ConfirmationCodeProvider>();
             services.Configure<Infrastructure.ConfirmationCodeProvider.ConfirmationCodeProviderOptions>(Configuration.GetSection("ConfirmationCode"));
 
+            services.AddScoped<Domain.Registration.IConfirmationCodeSender, Infrastructure.EmailService.EmailService>();
+
+            #endregion
+
+            #region Email
+
+            services.Configure<Infrastructure.EmailService.EmailServiceOptions>(Configuration.GetSection("EmailService"));
+
             #endregion
 
             #region RefreshTokenStore

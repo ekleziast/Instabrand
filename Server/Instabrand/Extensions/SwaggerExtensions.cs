@@ -16,7 +16,7 @@ namespace Instabrand.Extensions
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Instabrand Api"
+                    Title = "Boxis Api"
                 });
 
 

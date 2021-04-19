@@ -38,7 +38,7 @@ namespace Instabrand.Controllers
                 return Conflict();
             }
 
-            user = registrationService.CreateUser(binding.Email, binding.Password);
+            user = await registrationService.CreateUser(binding.Email, binding.Password, cancellationToken);
 
             try
             {
@@ -90,6 +90,37 @@ namespace Instabrand.Controllers
 
             return NoContent();
         }
+
+        /// <summary>
+        /// Resend email confirmation code
+        /// </summary>
+        /// <param name="email">Email for confirming</param>
+        /// <response code="204">Successfully</response>
+        /// <response code="404">Email not found</response>
+        /// <response code="422">Email does not require confirmation</response>
+        [HttpPost("/registrations/{email}/resend")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ProblemDetails), 400)]
+        [ProducesResponseType(typeof(ProblemDetails), 422)]
+        public async Task<IActionResult> ResendConfirmationCode(
+            CancellationToken cancellationToken,
+            [FromRoute] string email,
+            [FromServices] IUserRepository userRepository,
+            [FromServices] UserRegistrationService userRegistrationService)
+        {
+            var user = await userRepository.FindByEmail(email, cancellationToken);
+
+            if (user == null)
+                return NotFound();
+
+            if (user.EmailState != EmailState.Unconfirmed)
+                return UnprocessableEntity();
+
+            await userRegistrationService.ResendConfirmationCode(user, cancellationToken);
+
+            return NoContent();
+        }
+
 
         /// <summary>
         /// Get email confirmation code (temporary method)
