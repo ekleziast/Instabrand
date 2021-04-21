@@ -153,6 +153,7 @@ namespace Instabrand
             app.UseDbConcurrencyExceptionHandling();
 
             app.UseRouting();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
