@@ -9,6 +9,6 @@ HEALTHCHECK \
     --timeout=10s \
     --start-period=10s \
     --retries=3 \
-    CMD curl -f http://localhost/hc 2>&1 || exit 1
+    CMD curl -f http://localhost/api/v1/hc 2>&1 || exit 1
 
 ENTRYPOINT ["dotnet", "Instabrand.dll"]

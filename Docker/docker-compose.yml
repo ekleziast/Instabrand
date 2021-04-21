@@ -15,7 +15,7 @@ services:
       - ConfirmationCode__LifeTimeCodeInMinute=${CONFIRMATIONCODE_LIFETIMECODEINMINUTE:-30}
       - EmailService__SmtpServer=${EMAIL_SMTP_SERVER:-mail.nic.ru}
       - EmailService__FromAddress=${EMAIL_ADDRESS:-admin@boxis.io}
-      - EmailService__Password=${EMAIL_PASSWORD:-password}
+      - EmailService__Password=${{ secrets.EMAIL_PASSWORD }}
     depends_on:
       - boxis-postgresdb
     restart: always
@@ -36,19 +36,26 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ../letsencrypt/:/etc/letsencrypt
       - /docker-data/boxis/logs/proxy/:/var/log/nginx
       - ./nginx/boxis.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/boxis-upstreams/api.conf:/etc/nginx/conf.d/boxis-upstreams/api.conf
       - ./nginx/boxis-locations/api.conf:/etc/nginx/conf.d/boxis-locations/api.conf
       - ./nginx/boxis-upstreams/client.conf:/etc/nginx/conf.d/boxis-upstreams/client.conf
       - ./nginx/boxis-locations/client.conf:/etc/nginx/conf.d/boxis-locations/client.conf
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
     depends_on:
       - boxis-webapi
       - boxis-client
     restart: always
     networks: 
       - frontend-network
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
 
   boxis-postgresdb:
     build:
