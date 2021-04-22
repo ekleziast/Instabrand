@@ -43,7 +43,7 @@ services:
       - ./nginx/boxis-upstreams/client.conf:/etc/nginx/conf.d/boxis-upstreams/client.conf
       - ./nginx/boxis-locations/client.conf:/etc/nginx/conf.d/boxis-locations/client.conf
       - /home/remote/ssl-data/:/etc/ssl/certs/
-      - ./nginx/dhparam/:/etc/ssl/certs/
+      - ./nginx/dhparam/:/etc/ssl/dhparam/
     depends_on:
       - boxis-webapi
       - boxis-client
