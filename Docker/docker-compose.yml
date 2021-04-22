@@ -42,8 +42,8 @@ services:
       - ./nginx/boxis-locations/api.conf:/etc/nginx/conf.d/boxis-locations/api.conf
       - ./nginx/boxis-upstreams/client.conf:/etc/nginx/conf.d/boxis-upstreams/client.conf
       - ./nginx/boxis-locations/client.conf:/etc/nginx/conf.d/boxis-locations/client.conf
-      - ./nginx/certbot/conf:/etc/letsencrypt
-      - ./nginx/certbot/www:/var/www/certbot
+      - /home/remote/ssl-data/:/etc/ssl/certs/
+      - ./nginx/dhparam/:/etc/ssl/certs/
     depends_on:
       - boxis-webapi
       - boxis-client
