@@ -6,7 +6,7 @@
 
 ## Run:
 
-# Generate DH param for SSL
+### Generate DH param for SSL
 ```
 cd Docker/nginx
 mkdir dhparam
@@ -14,7 +14,7 @@ openssl dhparam -out ./dhparam.pem 4096
 cd ..
 ```
 
-# Pull and start Docker containers
+### Pull and start Docker containers
 ```
 docker-compose pull
 docker-compose up -d
