@@ -51,12 +51,6 @@ services:
     networks: 
       - frontend-network
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./nginx/certbot/conf:/etc/letsencrypt
-      - ./nginx/certbot/www:/var/www/certbot
-
   boxis-postgresdb:
     build:
         context: ./postgres
