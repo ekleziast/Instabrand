@@ -15,7 +15,7 @@ services:
       - ConfirmationCode__LifeTimeCodeInMinute=${CONFIRMATIONCODE_LIFETIMECODEINMINUTE:-30}
       - EmailService__SmtpServer=${EMAIL_SMTP_SERVER:-mail.nic.ru}
       - EmailService__FromAddress=${EMAIL_ADDRESS:-admin@boxis.io}
-      - EmailService__Password=${{ secrets.EMAIL_PASSWORD }}
+      - EmailService__Password=${EMAIL_PASSWORD:-password}
     depends_on:
       - boxis-postgresdb
     restart: always
