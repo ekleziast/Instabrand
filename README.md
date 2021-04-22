@@ -8,14 +8,14 @@
 
 ### Generate DH param for SSL
 ```
-cd Docker/nginx
-mkdir dhparam
+cd ~/home/remote/dhparam/
 openssl dhparam -out ./dhparam.pem 4096
 cd ..
 ```
 
 ### Pull and start Docker containers
 ```
+cd Docker
 docker-compose pull
 docker-compose up -d
 ```
