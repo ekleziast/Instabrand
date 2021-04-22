@@ -31,7 +31,7 @@ namespace Instabrand.Domain.Registration
         public void Confirm()
         {
             if (EmailState != EmailState.Unconfirmed)
-                throw new InvalidOperationException($"Invalid state {EmailState}");
+                throw new UserEmailAlreadyConfirmedException();
 
             EmailState = EmailState.Confirmed;
 
