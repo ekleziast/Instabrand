@@ -16,6 +16,7 @@ services:
       - EmailService__SmtpServer=${EMAIL_SMTP_SERVER:-mail.nic.ru}
       - EmailService__FromAddress=${EMAIL_ADDRESS:-admin@boxis.io}
       - EmailService__Password=${EMAIL_PASSWORD:-password}
+      - EmailService__Port=${EMAIL_PORT:-465}
     depends_on:
       - boxis-postgresdb
     restart: always

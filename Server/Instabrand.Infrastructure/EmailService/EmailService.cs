@@ -11,12 +11,14 @@ namespace Instabrand.Infrastructure.EmailService
         private readonly string _smtpServer;
         private readonly string _fromAddress;
         private readonly string _password;
+        private readonly int _port;
 
         public EmailService(IOptions<EmailServiceOptions> options)
         {
             _smtpServer = options.Value.SmtpServer;
             _fromAddress = options.Value.FromAddress;
             _password = options.Value.Password;
+            _port = options.Value.Port;
         }
 
         public async Task SendConfirmationCode(string email, string confirmationCode, CancellationToken cancellationToken)
@@ -43,7 +45,7 @@ Please confirm your email: <br />
 
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync(_smtpServer, 587, false, cancellationToken);
+                await client.ConnectAsync(_smtpServer, _port, false, cancellationToken);
                 await client.AuthenticateAsync(_fromAddress, _password);
                 await client.SendAsync(emailMessage);
 
