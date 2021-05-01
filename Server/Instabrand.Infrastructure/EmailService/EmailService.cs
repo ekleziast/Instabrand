@@ -45,9 +45,9 @@ Please confirm your email: <br />
 
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync(_smtpServer, _port, false, cancellationToken);
-                await client.AuthenticateAsync(_fromAddress, _password);
-                await client.SendAsync(emailMessage);
+                await client.ConnectAsync(_smtpServer, _port, true, cancellationToken);
+                await client.AuthenticateAsync(_fromAddress, _password, cancellationToken);
+                await client.SendAsync(emailMessage, cancellationToken);
 
                 await client.DisconnectAsync(true);
             }
