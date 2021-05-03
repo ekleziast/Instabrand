@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Serilog.Context;
 using System.Threading.Tasks;
 
 namespace Instabrand.Middlewares
@@ -27,12 +26,6 @@ namespace Instabrand.Middlewares
             {
                 context.TraceIdentifier = requestId;
                 _contextAccessor.HttpContext ??= context;
-            }
-
-            using (_logger.BeginScope("#" + context.TraceIdentifier))
-            {
-                LogContext.PushProperty("TraceIdentifier", context.TraceIdentifier);
-                await _next(context);
             }
         }
     }

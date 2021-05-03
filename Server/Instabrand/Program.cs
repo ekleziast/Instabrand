@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace Instabrand
 {
@@ -19,12 +19,23 @@ namespace Instabrand
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                        .UseStartup<Startup>()
-                        .UseSerilog((whbc, conf) =>
-                            conf
-                                .ReadFrom
-                                .Configuration(whbc.Configuration)
-                                .Enrich.FromLogContext());
+                        .UseStartup<Startup>();
+                }).ConfigureLogging((context, config) =>
+                {
+                    if (context.HostingEnvironment.IsDevelopment())
+                    {
+                        config.AddSimpleConsole(config =>
+                        {
+                            config.IncludeScopes = false;
+                        });
+                    }
+                    else
+                    {
+                        config.AddSimpleConsole(config =>
+                        {
+                            config.IncludeScopes = false;
+                        });
+                    }
                 });
     }
 }
