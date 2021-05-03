@@ -25,7 +25,7 @@ namespace Instabrand.Controllers
         [ProducesResponseType(typeof(ProblemDetails), 412)]
         public async Task<IActionResult> Registration(
             CancellationToken cancellationToken,
-            [FromBody] RegistrationBinding binding,
+            [FromForm] RegistrationBinding binding,
             [FromServices] IUserRepository userRepository,
             [FromServices] UserRegistrationService registrationService)
         {

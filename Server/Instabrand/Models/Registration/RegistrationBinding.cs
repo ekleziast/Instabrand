@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Instabrand.Models.Registration
 {
@@ -7,11 +8,13 @@ namespace Instabrand.Models.Registration
         /// <summary>
         /// User email
         /// </summary>
+        [FromForm(Name = "email")]
         public string Email { get; set; }
 
         /// <summary>
         /// User password
         /// </summary>
+        [FromForm(Name = "password")]
         public string Password { get; set; }
     }
 
