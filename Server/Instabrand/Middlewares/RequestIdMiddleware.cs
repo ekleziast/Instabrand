@@ -27,6 +27,11 @@ namespace Instabrand.Middlewares
                 context.TraceIdentifier = requestId;
                 _contextAccessor.HttpContext ??= context;
             }
+
+            using (_logger.BeginScope("#" + context.TraceIdentifier))
+            {
+                await _next(context);
+            }
         }
     }
 
