@@ -125,6 +125,16 @@ namespace Instabrand
 
             #endregion
 
+            #region Instagram
+
+            services.Configure<Infrastructure.Instagram.InstagramApiOptions>(Configuration.GetSection("InstagramApi"));
+            services.AddHttpClient<Infrastructure.Instagram.InstagramApi>(options =>
+            {
+                options.BaseAddress = new System.Uri(@"https://api.instagram.com/");
+            });
+
+            #endregion
+
             #region QueryHandlers
 
             services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();

@@ -1,4 +1,5 @@
-﻿using Instabrand.Models.Authentication;
+﻿using Instabrand.Infrastructure.Instagram.ResponseViews;
+using Instabrand.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,6 +51,30 @@ namespace Instabrand.Controllers
                     }
                 default:
                     return BadRequest(new ErrorView(ErrorCode.UnsupportedGrantType, $"Unsupported grant type: {binding.GrantType}"));
+            }
+        }
+
+        /// <summary>
+        /// Facebook authentication
+        /// </summary>
+        /// <param name="binding">Authentication model</param>
+        /// <response code="200">Successfully</response>
+        /// <response code="400">Bad request</response>
+        [HttpPost("oauth2/fb")]
+        [ProducesResponseType(typeof(AuthResponseView), 200)]
+        [ProducesResponseType(typeof(ErrorView), 400)]
+        public async Task<IActionResult> FbAuthentication(
+            CancellationToken cancellationToken,
+            [FromForm] FbAuthenticationBinding binding,
+            [FromServices] Infrastructure.Instagram.InstagramApi instagramApi)
+        {
+            try
+            {
+                return Ok(await instagramApi.Auth(binding.Code, cancellationToken));
+            }
+            catch (Infrastructure.Instagram.ApiException ex)
+            {
+                return BadRequest(new ErrorView(ErrorCode.InstagramException, ex.Reason));
             }
         }
     }

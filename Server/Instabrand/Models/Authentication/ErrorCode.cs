@@ -15,6 +15,8 @@ namespace Instabrand.Models.Authentication
         [EnumMember(Value = "unsupported_grant_type")]
         UnsupportedGrantType,
         [EnumMember(Value = "invalid_scope")]
-        InvalidScope
+        InvalidScope,
+        [EnumMember(Value = "instagram_exception")]
+        InstagramException
     }
 }
