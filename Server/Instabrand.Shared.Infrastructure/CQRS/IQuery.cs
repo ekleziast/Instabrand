@@ -17,7 +17,7 @@ namespace Instabrand.Shared.Infrastructure.CQRS
     /// <summary>
     /// Интерфейс для обработки <see cref="IQuery{TResult}"/>
     /// </summary>
-    public interface IQueryHandler<TQuery, TResult> : IQueryHandler where TQuery: IQuery<TResult>
+    public interface IQueryHandler<TQuery, TResult> : IQueryHandler where TQuery : IQuery<TResult>
     {
         /// <summary>
         /// Выполнение запроса

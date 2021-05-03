@@ -1,10 +1,10 @@
-﻿using System;
-using System.Net.Sockets;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
+using System;
+using System.Net.Sockets;
 
 namespace Instabrand
 {

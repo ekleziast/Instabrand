@@ -1,8 +1,8 @@
-﻿using MimeKit;
-using MailKit.Net.Smtp;
-using System.Threading.Tasks;
+﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
+using MimeKit;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Instabrand.Infrastructure.EmailService
 {

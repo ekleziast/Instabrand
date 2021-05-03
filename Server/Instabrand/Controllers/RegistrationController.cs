@@ -1,5 +1,4 @@
 ﻿using Instabrand.Domain.Registration;
-using Instabrand.Extensions;
 using Instabrand.Models.Registration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

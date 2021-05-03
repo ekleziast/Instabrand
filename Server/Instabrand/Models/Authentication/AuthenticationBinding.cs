@@ -43,7 +43,7 @@ namespace Instabrand.Models.Authentication
             RuleFor(o => o.Password)
                 .NotEmpty()
                 .When(o => o.GrantType == GrantType.Password);
-            
+
             RuleFor(o => o.RefreshToken)
                 .NotEmpty()
                 .When(o => o.GrantType == GrantType.RefreshToken);

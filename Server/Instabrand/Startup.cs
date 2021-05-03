@@ -1,4 +1,4 @@
- using FluentValidation.AspNetCore;
+using FluentValidation.AspNetCore;
 using Instabrand.Extensions;
 using Instabrand.Middlewares;
 using Instabrand.Shared.Infrastructure.CQRS;

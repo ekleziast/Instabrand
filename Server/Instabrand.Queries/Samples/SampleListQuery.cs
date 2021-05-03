@@ -1,5 +1,4 @@
-﻿using Instabrand.Shared.Infrastructure.CQRS;
-using System;
+﻿using System;
 
 namespace Instabrand.Queries.Samples
 {
