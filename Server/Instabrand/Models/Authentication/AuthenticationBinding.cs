@@ -24,7 +24,7 @@ namespace Instabrand.Models.Authentication
         public string Password { get; set; }
 
         /// <summary>
-        /// Refresh token (grant_type == refresh_token)
+        /// Refresh token (grant_type == refreshtoken)
         /// </summary>
         [FromForm(Name = "refresh_token")]
         public string RefreshToken { get; set; }
