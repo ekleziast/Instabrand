@@ -22,18 +22,25 @@
         "react-hooks"
     ],
     "rules": {
+        "jsx-quotes": ["error", "prefer-single"],
+        "react/jsx-fragments": ["error", "element"],
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/react-in-jsx-scope": 0,
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "react/react-in-jsx-scope": 0,
+        "react/display-name": 0,
+        "react/prop-types": [
+            2,
+            { "ignore": ["children"] }
+        ],
         "no-undef": 1,
         "indent": [
             "error",
-            4
+            4,
+            { "SwitchCase": 1 }
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
+        "linebreak-style": 0,
         "quotes": [
             "error",
             "single"

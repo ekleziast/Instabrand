@@ -1,25 +1,23 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import PropTypes from 'prop-types';
 
-MainLayout.propTypes = {
-    children: PropTypes.node
-};
+import Button from 'components/Button';
+import { useUserContext } from 'context/user';
 
-export default function MainLayout({
+export default function PersonalLayout({
     children = null
 }) {
+    const { logout } = useUserContext();
+
     return (
-        <>
+        <Fragment>
             <Head>
                 <title>Boxis.io</title>
             </Head>
 
             <header>
                 <h1>Boxis.io</h1>
-                <nav>
-                    <Link href='/'><a>Главная</a></Link>
-                </nav>
+                <Button onClick={logout} className='btn-danger'>Выход</Button>
             </header>
 
             <main>
@@ -29,6 +27,6 @@ export default function MainLayout({
             <footer>
                 footer
             </footer>
-        </>
+        </Fragment>
     );
 }

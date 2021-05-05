@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
 
 import Portal from 'components/Portal';
 
 Modal.propTypes = {
     open: PropTypes.bool.isRequired,
-    children: PropTypes.node,
     hideCloseButton: PropTypes.bool,
     className: PropTypes.string,
     dialogClassName: PropTypes.string,
@@ -13,7 +13,7 @@ Modal.propTypes = {
     onClose: PropTypes.func.isRequired
 };
 
-export default function Modal({
+function Modal({
     open = false,
     children = null,
     hideCloseButton = false,
@@ -54,7 +54,7 @@ export default function Modal({
     }, [open, onClose]);
 
     return active || open ? (
-        <Portal parent='body'>
+        <Portal parent={document.querySelector('#__next')}>
             <div ref={reference} id='modal' tabIndex='-1' className={`modal ${className}`}>
                 <div className={`modal-dialog modal-dialog-centered ${dialogClassName}`}>
                     <div className={`modal-content ${contentClassName}`}>
@@ -72,3 +72,7 @@ export default function Modal({
         </Portal>
     ) : null;
 }
+
+export default dynamic(() => Promise.resolve(Modal), {
+    ssr: false
+});

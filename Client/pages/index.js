@@ -1,17 +1,18 @@
-import MainLayout from 'layouts/MainLayout';
-import Link from 'next/link';
+import { HomeProvider } from 'context/home';
+import Home from 'components/Home';
+import authMiddleware from 'middleware/auth';
+import Values from 'classes/Values';
 
-export default function Home() {
+export default function Main() {
     return (
-        <MainLayout>
-            <section>
-                <h4>Примеры сайтов:</h4>
-                <ul>
-                    <li>
-                        <Link href='/[id]' as={'/coffehouse'}><a>Кофе-хаус</a></Link>
-                    </li>
-                </ul>
-            </section>
-        </MainLayout>
+        <HomeProvider>
+            <Home/>
+        </HomeProvider>
     );
+}
+
+export async function getServerSideProps({ req, res }) {
+    await authMiddleware({ req, res });
+
+    return Values.emptyProps;
 }

@@ -3,8 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 Portal.propTypes = {
-    children: PropTypes.node.isRequired,
-    parent: PropTypes.node.isRequired,
+    parent: PropTypes.any.isRequired,
     className: PropTypes.string
 };
 

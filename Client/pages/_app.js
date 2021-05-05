@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
+import { Localizer, LocaleProvider } from 'reactjs-localizer';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+import { UserProvider } from 'context/user';
+import locales from 'locales.json';
 import 'styles/app.scss';
+
+Localizer.defaultLanguage = 'ru';
+Localizer.mount(locales);
 
 App.propTypes = {
     Component: PropTypes.elementType,
@@ -10,7 +16,13 @@ App.propTypes = {
 };
 
 function App({ Component, pageProps }) {
-    return <Component {...pageProps} />;
+    return (
+        <UserProvider>
+            <LocaleProvider>
+                <Component {...pageProps} />
+            </LocaleProvider>
+        </UserProvider>
+    );
 }
 
 export default App;
