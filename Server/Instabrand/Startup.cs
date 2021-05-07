@@ -60,7 +60,7 @@ namespace Instabrand
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+            }).AddJwtBearer("user", options =>
             {
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -132,6 +132,20 @@ namespace Instabrand
             {
                 options.BaseAddress = new System.Uri(@"https://api.instagram.com/");
             });
+
+            services.AddHttpClient<Infrastructure.Instagram.InstagramGraphApi>(options =>
+            {
+                options.BaseAddress = new System.Uri(@"https://graph.instagram.com/");
+            });
+
+            services.AddScoped<Infrastructure.Instagram.InstapageCreationService>();
+
+            #endregion
+
+            #region Instapages
+
+            services.AddNpgsqlDbContextPool<Infrastructure.Instapages.InstapagesDbContext>(npgsqlConnectionString);
+            services.AddScoped<Domain.Instapage.IInstapageRepository, Infrastructure.Instapages.InstapageRepository>();
 
             #endregion
 

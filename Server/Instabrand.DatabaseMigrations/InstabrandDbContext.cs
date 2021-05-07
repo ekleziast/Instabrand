@@ -53,6 +53,35 @@ namespace Instabrand.DatabaseMigrations
                 builder.Property(o => o.Expire)
                     .IsRequired();
             });
+
+            modelBuilder.Entity<Instapage>(builder =>
+            {
+                builder.ToTable("Instapages");
+                builder.HasKey(o => o.InstapageId);
+                builder.Property(o => o.InstapageId)
+                    .ValueGeneratedNever()
+                    .IsRequired();
+
+                builder.Property(o => o.InstagramId)
+                    .IsRequired();
+                builder.Property(o => o.InstagramLogin)
+                    .HasMaxLength(512)
+                    .IsRequired();
+
+                builder.Property(o => o.State)
+                    .IsRequired();
+
+                builder.Property(o => o.UserId)
+                    .IsRequired(false);
+
+                builder.Property(o => o.CreateDate)
+                    .IsRequired();
+                builder.Property(o => o.UpdateDate)
+                    .IsRequired();
+
+                builder.Property(o => o.AccessToken)
+                    .IsRequired();
+            });
         }
     }
 }

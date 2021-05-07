@@ -63,14 +63,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres/postgresql.conf:/var/lib/postgresql/boxis/data/postgresql.conf
-      - boxis-pgdata:/var/lib/postgresql/boxis/data
-      - boxis-pglogs:/var/log/postgresql/boxis
+      - ./postgres/postgresql.conf:/var/lib/postgresql/boxis/postgresql.conf
+      - PGDATA:/var/lib/postgresql/data/boxis/
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - PGDATA=/var/lib/postgresql/data/boxis-db
+      - PGDATA=/var/lib/postgresql/data/boxis/
+      - DB_VENDOR=postgres
     restart: always
     networks:
       - postgres-network
@@ -78,10 +78,7 @@ services:
 volumes:
   boxis-data:
     driver: local
-  boxis-pgdata:
-    driver: local
-  boxis-pglogs:
-    driver: local
+  PGDATA:
 
 networks:
   backend-network:

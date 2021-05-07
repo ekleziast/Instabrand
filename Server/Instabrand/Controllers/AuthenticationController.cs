@@ -1,5 +1,7 @@
-﻿using Instabrand.Infrastructure.Instagram.ResponseViews;
+﻿using Instabrand.Extensions;
+using Instabrand.Infrastructure.Instagram.ResponseViews;
 using Instabrand.Models.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,20 +59,26 @@ namespace Instabrand.Controllers
         /// <summary>
         /// Facebook authentication
         /// </summary>
-        /// <param name="binding">Authentication model</param>
-        /// <response code="200">Successfully</response>
+        /// <param name="fbBinding">Authentication model</param>
+        /// <response code="201">Successfully</response>
         /// <response code="400">Bad request</response>
+        [Authorize(Policy = "user")]
         [HttpPost("oauth2/fb")]
-        [ProducesResponseType(typeof(AuthResponseView), 200)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(typeof(ErrorView), 400)]
         public async Task<IActionResult> FbAuthentication(
             CancellationToken cancellationToken,
-            [FromForm] FbAuthenticationBinding binding,
-            [FromServices] Infrastructure.Instagram.InstagramApi instagramApi)
+            [FromForm] FbAuthenticationBinding fbBinding,
+            [FromServices] Infrastructure.Instagram.InstapageCreationService creationService,
+            [FromServices] Domain.Instapage.IInstapageRepository instapageRepository)
         {
             try
             {
-                return Ok(await instagramApi.Auth(binding.Code, cancellationToken));
+                var instapage = await creationService.CreateInstapage(User.GetId(), fbBinding.Code, cancellationToken);
+
+                await instapageRepository.Save(instapage);
+
+                return NoContent();
             }
             catch (Infrastructure.Instagram.ApiException ex)
             {
