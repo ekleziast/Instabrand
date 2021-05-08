@@ -62,9 +62,11 @@ namespace Instabrand.Controllers
         /// <param name="fbBinding">Authentication model</param>
         /// <response code="201">Successfully</response>
         /// <response code="400">Bad request</response>
+        /// <response code="409">Instagram already registered</response>
         [Authorize(Policy = "user")]
         [HttpPost("oauth2/fb")]
         [ProducesResponseType(201)]
+        [ProducesResponseType(409)]
         [ProducesResponseType(typeof(ErrorView), 400)]
         public async Task<IActionResult> FbAuthentication(
             CancellationToken cancellationToken,
@@ -75,6 +77,11 @@ namespace Instabrand.Controllers
             try
             {
                 var instapage = await creationService.CreateInstapage(User.GetId(), fbBinding.Code, cancellationToken);
+
+                var instapageExists = await instapageRepository.GetByInstagram(instapage.InstagramLogin, cancellationToken);
+
+                if (instapageExists != null)
+                    return Conflict();
 
                 await instapageRepository.Save(instapage);
 

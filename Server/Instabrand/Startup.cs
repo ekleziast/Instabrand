@@ -153,6 +153,8 @@ namespace Instabrand
 
             services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
 
+            services.AddNpgsqlDbContextPool<Queries.Infrastructure.Users.UsersDbContext>(npgsqlConnectionString);
+
             #endregion
 
             #region DatabaseMigrations
