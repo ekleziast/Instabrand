@@ -17,6 +17,7 @@ namespace Instabrand.Controllers
         [Authorize(Policy = "user")]
         [HttpGet("/users/details")]
         [ProducesResponseType(typeof(UserDetailsView), 200)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(typeof(ProblemDetails), 404)]
         public async Task<ActionResult> GetSample(
             CancellationToken cancellationToken,

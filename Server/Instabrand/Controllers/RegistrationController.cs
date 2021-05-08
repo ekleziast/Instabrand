@@ -119,40 +119,5 @@ namespace Instabrand.Controllers
 
             return NoContent();
         }
-
-
-        /// <summary>
-        /// Get email confirmation code (temporary method)
-        /// </summary>
-        /// <response code="204">Successfully</response>
-        /// <response code="400">Email must be not empty</response>
-        /// <response code="404">Email not found</response>
-        /// <response code="422">Email does not require confirmation</response>
-        [HttpGet("/registrations/confirmationcode")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(422)]
-        public async Task<IActionResult> ResendConfirmationCodeForFaceterCustomer(
-            CancellationToken cancellationToken,
-            [FromQuery] string email,
-            [FromServices] IUserRepository userRepository,
-            [FromServices] IConfirmationCodeProvider confirmationCodeProvider)
-        {
-            if (email == null)
-                return BadRequest();
-
-            var user = await userRepository.FindByEmail(email, cancellationToken);
-
-            if (user == null)
-                return NotFound();
-
-            if (user.EmailState != EmailState.Unconfirmed)
-                return UnprocessableEntity();
-
-            var confirmationCode = confirmationCodeProvider.Generate(user.Email);
-
-            return Ok(confirmationCode);
-        }
     }
 }

@@ -67,6 +67,7 @@ namespace Instabrand.Controllers
         [HttpPost("oauth2/fb")]
         [ProducesResponseType(typeof(InstapageView), 200)]
         [ProducesResponseType(typeof(ErrorView), 400)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(409)]
         public async Task<IActionResult> FbAuthentication(
             CancellationToken cancellationToken,
