@@ -60,14 +60,14 @@ namespace Instabrand.Controllers
         /// Facebook authentication
         /// </summary>
         /// <param name="fbBinding">Authentication model</param>
-        /// <response code="201">Successfully</response>
+        /// <response code="200">Successfully</response>
         /// <response code="400">Bad request</response>
         /// <response code="409">Instagram already registered</response>
         [Authorize(Policy = "user")]
         [HttpPost("oauth2/fb")]
-        [ProducesResponseType(201)]
-        [ProducesResponseType(409)]
+        [ProducesResponseType(typeof(InstapageView), 200)]
         [ProducesResponseType(typeof(ErrorView), 400)]
+        [ProducesResponseType(409)]
         public async Task<IActionResult> FbAuthentication(
             CancellationToken cancellationToken,
             [FromForm] FbAuthenticationBinding fbBinding,
@@ -85,12 +85,20 @@ namespace Instabrand.Controllers
 
                 await instapageRepository.Save(instapage);
 
-                return NoContent();
+                return Ok(new InstapageView
+                {
+                    Login = instapage.InstagramLogin
+                });
             }
             catch (Infrastructure.Instagram.ApiException ex)
             {
                 return BadRequest(new ErrorView(ErrorCode.InstagramException, ex.Reason));
             }
+        }
+
+        class InstapageView
+        {
+            public string Login { get; init; }
         }
     }
 }
