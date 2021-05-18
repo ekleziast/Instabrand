@@ -125,6 +125,13 @@ namespace Instabrand
 
             #endregion
 
+            #region Instapage
+
+            services.AddScoped<Domain.Instapage.IInstapageRepository, Infrastructure.Instapages.InstapageRepository>();
+            services.AddNpgsqlDbContextPool<Infrastructure.Instapages.InstapagesDbContext>(npgsqlConnectionString);
+
+            #endregion
+
             #region Instagram
 
             services.Configure<Infrastructure.Instagram.InstagramApiOptions>(Configuration.GetSection("InstagramApi"));
@@ -139,6 +146,13 @@ namespace Instabrand
             });
 
             services.AddScoped<Infrastructure.Instagram.InstapageCreationService>();
+
+            #endregion
+
+            #region FileStorage
+
+            services.AddSingleton<Domain.IFileStorage, Infrastructure.FileStorage.FileStorage>();
+            services.Configure<Infrastructure.FileStorage.FilePathOptions>(Configuration.GetSection("FilePathOptions"));
 
             #endregion
 

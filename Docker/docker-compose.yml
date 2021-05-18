@@ -5,6 +5,7 @@ services:
     image: ekleziast56/boxis:latest
     volumes:
       - /docker-data/boxis/logs/webapi/:/app/logs
+      - ${FILEPATHOPTIONS_FILEPATH:-/var/lib/boxis/files}:/var/lib/boxis/files
     environment:
       - ConnectionStrings:Boxis=Server=boxis-postgresdb;Port=5432;Database=${POSTGRES_DB};User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};
       - Auth__UserJwt__Issuer=${USERJWT_ISSUER:-Boxis.Api}
@@ -20,6 +21,7 @@ services:
       - InstagramApi__AppId=${INSTAGRAM_APPID:-288092762863872}
       - InstagramApi__SecretKey=${INSTAGRAM_SECRETKEY:-secret}
       - InstagramApi__RedirectUri=${INSTAGRAM_REDIRECTURI:-https://boxis.io/auth/fb}
+      - FilePathOptions__FilePath=${FILEPATHOPTIONS_FILEPATH:-/var/lib/boxis/files}
     depends_on:
       - boxis-postgresdb
     restart: always

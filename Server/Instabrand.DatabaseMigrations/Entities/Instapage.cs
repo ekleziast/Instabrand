@@ -13,9 +13,14 @@ namespace Instabrand.DatabaseMigrations.Entities
 
         public string AccessToken { get; set; }
 
+        public string Title { get; set; }
+        public string Description { get; set; }
+
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
 
         public string State { get; set; }
+
+        public Guid ConcurrencyToken { get; set; }
     }
 }

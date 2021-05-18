@@ -81,6 +81,38 @@ namespace Instabrand.DatabaseMigrations
 
                 builder.Property(o => o.AccessToken)
                     .IsRequired();
+
+                builder.Property(o => o.Title)
+                    .IsRequired(false);
+                builder.Property(o => o.Description)
+                    .IsRequired(false);
+
+                builder.Property(o => o.ConcurrencyToken)
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<Instapost>(builder =>
+            {
+                builder.ToTable("Instaposts");
+                builder.HasKey(o => o.InstapostId);
+                builder.Property(o => o.InstapostId)
+                    .IsRequired();
+
+                builder.Property(o => o.InstapageId)
+                    .IsRequired();
+
+                builder.Property(o => o.Title)
+                    .HasMaxLength(128)
+                    .IsRequired();
+
+                builder.Property(o => o.Description);
+
+                builder.Property(o => o.Price)
+                    .IsRequired();
+
+                builder.Property(o => o.Currency)
+                    .HasMaxLength(128)
+                    .IsRequired();
             });
         }
     }

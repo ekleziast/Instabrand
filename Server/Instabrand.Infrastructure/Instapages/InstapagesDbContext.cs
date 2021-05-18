@@ -8,6 +8,7 @@ namespace Instabrand.Infrastructure.Instapages
         public InstapagesDbContext(DbContextOptions options) : base(options) { }
 
         internal DbSet<Instapage> Instapages { get; set; }
+        internal DbSet<Instapost> Instaposts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,7 +41,48 @@ namespace Instabrand.Infrastructure.Instapages
 
                 builder.Property(o => o.AccessToken)
                     .IsRequired();
+
+                builder.Property(o => o.Title)
+                    .IsRequired(false);
+                builder.Property(o => o.Description)
+                    .IsRequired(false);
+
+                builder.HasMany(instapage => instapage.Instaposts).WithOne()
+                    .HasForeignKey(instapost => instapost.InstapageId)
+                    .HasPrincipalKey(instapage => instapage.Id);
+
+                builder.Property("_concurrencyToken")
+                    .HasColumnName("ConcurrencyToken")
+                    .IsConcurrencyToken();
             });
+
+            modelBuilder.Entity<Instapost>(builder =>
+            {
+                builder.ToTable("Instaposts");
+                builder.HasKey(o => o.Id);
+                builder.Property(o => o.Id)
+                    .HasColumnName("InstapostId")
+                    .ValueGeneratedNever()
+                    .IsRequired();
+
+                builder.Property(o => o.InstapageId)
+                    .IsRequired();
+
+                builder.Property(o => o.Title)
+                    .HasMaxLength(128)
+                    .IsRequired();
+
+                builder.Property(o => o.Description);
+
+                builder.Property(o => o.Price)
+                    .IsRequired();
+
+                builder.Property(o => o.Currency)
+                    .HasMaxLength(128)
+                    .IsRequired();
+            });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
