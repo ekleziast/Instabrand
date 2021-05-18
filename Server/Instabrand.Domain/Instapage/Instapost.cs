@@ -10,10 +10,12 @@ namespace Instabrand.Domain.Instapage
         public string Description { get; }
         public decimal Price { get; }
         public string Currency { get; }
+        public DateTime Timestamp { get; }
 
         private Instapost() { }
 
-        public Instapost(string id, Guid instapageId, string title, string description, decimal price, string currency)
+        public Instapost(string id, Guid instapageId, string title, string description,
+            decimal price, string currency, DateTime timestamp)
         {
             Id = id;
             InstapageId = instapageId;
@@ -21,6 +23,7 @@ namespace Instabrand.Domain.Instapage
             Description = description;
             Price = price;
             Currency = currency ?? throw new ArgumentNullException(nameof(currency));
+            Timestamp = timestamp;
         }
     }
 }

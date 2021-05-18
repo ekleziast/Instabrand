@@ -11,6 +11,9 @@ namespace Instabrand.DatabaseMigrations.Entities
         public string InstagramLogin { get; set; }
         public string InstagramId { get; set; }
 
+        public string Vkontakte { get; set; }
+        public string Telegram { get; set; }
+
         public string AccessToken { get; set; }
 
         public string Title { get; set; }

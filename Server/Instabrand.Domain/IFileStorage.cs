@@ -6,7 +6,7 @@ namespace Instabrand.Domain
 {
     public interface IFileStorage
     {
-        Stream Get(string fileName);
-        Task SaveInstapostImage(string instapostId, string instagramLogin, Stream stream, CancellationToken cancellationToken);
+        Stream Get(string filename);
+        Task Save(string filename, string instagramLogin, Stream stream, CancellationToken cancellationToken);
     }
 }

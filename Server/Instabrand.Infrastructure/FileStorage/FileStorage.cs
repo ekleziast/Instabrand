@@ -16,9 +16,9 @@ namespace Instabrand.Infrastructure.FileStorage
             _filePath = options.Value.FilePath;
         }
 
-        public Stream Get(string fileName)
+        public Stream Get(string filename)
         {
-            var filePath = Path.Combine(_filePath, $"{fileName}.jpg");
+            var filePath = Path.Combine(_filePath, filename);
 
             if (!File.Exists(filePath))
                 throw new InvalidOperationException("File does not exists");
@@ -28,7 +28,7 @@ namespace Instabrand.Infrastructure.FileStorage
             return fs;
         }
 
-        public async Task SaveInstapostImage(string instapostId, string instagramLogin, Stream stream, CancellationToken cancellationToken)
+        public async Task Save(string filename, string instagramLogin, Stream stream, CancellationToken cancellationToken)
         {
             if (!Directory.Exists(_filePath))
                 Directory.CreateDirectory(_filePath);
@@ -38,12 +38,9 @@ namespace Instabrand.Infrastructure.FileStorage
             if (!Directory.Exists(filePath))
                 Directory.CreateDirectory(filePath);
 
-            filePath = Path.Combine(filePath, $"{instapostId}.jpg");
+            filePath = Path.Combine(filePath, filename);
 
-            if (File.Exists(filePath))
-                throw new InvalidOperationException("File already exists");
-
-            using var fs = new FileStream(filePath, FileMode.CreateNew);
+            using var fs = new FileStream(filePath, FileMode.Create);
 
             stream.Seek(0, SeekOrigin.Begin);
             await stream.CopyToAsync(fs, cancellationToken);

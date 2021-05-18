@@ -13,6 +13,9 @@ namespace Instabrand.Domain.Instapage
         public string InstagramLogin { get; }
         public string InstagramId { get; }
 
+        public string Vkontakte { get; private set; }
+        public string Telegram { get; private set; }
+
         public string AccessToken { get; }
 
         public string Title { get; private set; }
@@ -41,10 +44,12 @@ namespace Instabrand.Domain.Instapage
             UpdateDate = CreateDate;
         }
 
-        public void SetInfo(string title, string description)
+        public void SetInfo(string title, string description, string vkontakte, string telegram)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Description = description ?? throw new ArgumentNullException(nameof(description));
+            Vkontakte = vkontakte;
+            Telegram = telegram;
 
             _concurrencyToken = Guid.NewGuid();
         }

@@ -22,7 +22,9 @@ namespace Instabrand.Infrastructure.Instapages
 
         public async Task<Instapage> GetByInstagram(string instagram, CancellationToken cancellationToken)
         {
-            return await _context.Instapages.SingleOrDefaultAsync(o => o.InstagramLogin == instagram, cancellationToken);
+            return await _context.Instapages
+                .Include(o => o.Instaposts)
+                .SingleOrDefaultAsync(o => o.InstagramLogin == instagram, cancellationToken);
         }
 
         public async Task Save(Instapage instapage)

@@ -3,6 +3,7 @@ using Instabrand.Domain.Instapage;
 using Instabrand.Infrastructure.Instagram.ResponseViews;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace Instabrand.Infrastructure.Instagram
             var media = await _instagramGraphApi.GetMedia(accessToken, cancellationToken);
 
             return media.Data
+                .Where(o => o.MediaType == "IMAGE")
                 .OrderByDescending(o => o.Timestamp)
                 .Take(limit);
         }
@@ -50,7 +52,17 @@ namespace Instabrand.Infrastructure.Instagram
         {
             using var imageStream = await _instagramGraphApi.DownloadMedia(accessToken, mediaId, cancellationToken);
 
-            await _fileStorage.SaveInstapostImage(mediaId, instagramLogin, imageStream, cancellationToken);
+            await _fileStorage.Save($"{mediaId}.jpg", instagramLogin, imageStream, cancellationToken);
+        }
+
+        public async Task UploadBackground(string extension, Stream stream, string instagramLogin, CancellationToken cancellationToken)
+        {
+            await _fileStorage.Save($"background.{extension}", instagramLogin, stream, cancellationToken);
+        }
+
+        public async Task UploadFavicon(string extension, Stream stream, string instagramLogin, CancellationToken cancellationToken)
+        {
+            await _fileStorage.Save($"favicon.{extension}", instagramLogin, stream, cancellationToken);
         }
     }
 }

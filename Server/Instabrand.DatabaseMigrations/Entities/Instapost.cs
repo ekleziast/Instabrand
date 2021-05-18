@@ -10,5 +10,6 @@ namespace Instabrand.DatabaseMigrations.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Currency { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

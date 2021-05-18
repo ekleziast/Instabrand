@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 
-namespace Instabrand.Models.Instapages
+namespace Instabrand.Models.InstapagesConstructor
 {
-    public sealed class InstapageBinding
+    public sealed class CreateInstapageBinding
     {
         /// <summary>
         /// Instapage title
@@ -19,6 +20,16 @@ namespace Instabrand.Models.Instapages
         /// Instapage posts
         /// </summary>
         public IEnumerable<PostBinding> Posts { get; set; }
+
+        /// <summary>
+        /// VK social link
+        /// </summary>
+        public string Vkontakte { get; set; }
+
+        /// <summary>
+        /// Telegram social link
+        /// </summary>
+        public string Telegram { get; set; }
     }
 
     public sealed class PostBinding
@@ -47,9 +58,14 @@ namespace Instabrand.Models.Instapages
         /// Instapost price
         /// </summary>
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Instapost timestamp
+        /// </summary>
+        public DateTime Timestamp { get; set; }
     }
 
-    public class InstapageBindingValidator : AbstractValidator<InstapageBinding>
+    public class InstapageBindingValidator : AbstractValidator<CreateInstapageBinding>
     {
         public InstapageBindingValidator()
         {
@@ -71,6 +87,8 @@ namespace Instabrand.Models.Instapages
                         .NotEmpty();
                     post.RuleFor(s => s.Price)
                         .NotNull();
+                    post.RuleFor(s => s.Timestamp)
+                        .NotEmpty();
                 });
         }
     }

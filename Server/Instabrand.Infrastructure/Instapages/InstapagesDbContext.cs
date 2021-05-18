@@ -27,6 +27,13 @@ namespace Instabrand.Infrastructure.Instapages
                     .HasMaxLength(512)
                     .IsRequired();
 
+                builder.Property(o => o.Vkontakte)
+                    .HasMaxLength(1024)
+                    .IsRequired(false);
+                builder.Property(o => o.Telegram)
+                    .HasMaxLength(1024)
+                    .IsRequired(false);
+
                 builder.Property(o => o.State)
                     .HasConversion<string>()
                     .IsRequired();
@@ -79,6 +86,9 @@ namespace Instabrand.Infrastructure.Instapages
 
                 builder.Property(o => o.Currency)
                     .HasMaxLength(128)
+                    .IsRequired();
+
+                builder.Property(o => o.Timestamp)
                     .IsRequired();
             });
 
