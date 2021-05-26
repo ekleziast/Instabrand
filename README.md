@@ -10,7 +10,6 @@
 ```
 cd ~/home/remote/dhparam/
 openssl dhparam -out ./dhparam.pem 4096
-cd ..
 ```
 
 ### Pull and start Docker containers
