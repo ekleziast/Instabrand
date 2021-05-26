@@ -117,7 +117,7 @@ namespace Instabrand.Controllers
         }
 
         /// <summary>
-        /// Enable Instapage
+        /// Enable Instapage (temporary disabled) [WIP]
         /// </summary>
         /// <param name="login">Instagram login</param>
         /// <response code="201">Successfully</response>
@@ -156,7 +156,7 @@ namespace Instabrand.Controllers
         }
 
         /// <summary>
-        /// Disable Instapage
+        /// Disable Instapage (temporary disabled) [WIP]
         /// </summary>
         /// <param name="login">Instagram login</param>
         /// <response code="201">Successfully</response>
