@@ -15,7 +15,7 @@ namespace Instabrand.Controllers
         /// <param name="login">Instagram login</param>
         /// <response code="200">Successfully</response>
         /// <response code="400">Instapage is not enabled</response>
-        /// <response code="404">Background for this instapage not found</response>
+        /// <response code="404">Instapage or background for this instapage not found</response>
         /// <response code="422">Background has unprocessable extension</response>
         [HttpGet("/instapages/{login}/background")]
         [ProducesResponseType(200)]
@@ -29,8 +29,12 @@ namespace Instabrand.Controllers
             [FromServices] Domain.IFileStorage fileStorage)
         {
             var instapage = await instapageRepository.GetByInstagram(login, cancellationToken);
-            if (instapage.State != Domain.Instapage.InstapageState.Enabled)
-                return BadRequest();
+            if (instapage == null)
+                return NotFound();
+
+            // Feature Work In Progress [WIP]
+            //if (instapage.State != Domain.Instapage.InstapageState.Enabled)
+            //    return BadRequest();
 
             try
             {
@@ -59,7 +63,7 @@ namespace Instabrand.Controllers
         /// <param name="login">Instagram login</param>
         /// <response code="200">Successfully</response>
         /// <response code="400">Instapage is not enabled</response>
-        /// <response code="404">Favicon for this instapage not found</response>
+        /// <response code="404">Instapage or favicon for this instapage not found</response>
         /// <response code="422">Favicon has unprocessable extension</response>
         [HttpGet("/instapages/{login}/favicon")]
         [ProducesResponseType(200)]
@@ -73,8 +77,12 @@ namespace Instabrand.Controllers
             [FromServices] Domain.IFileStorage fileStorage)
         {
             var instapage = await instapageRepository.GetByInstagram(login, cancellationToken);
-            if (instapage.State != Domain.Instapage.InstapageState.Enabled)
-                return BadRequest();
+            if (instapage == null)
+                return NotFound();
+
+            // Feature Work In Progress [WIP]
+            //if (instapage.State != Domain.Instapage.InstapageState.Enabled)
+            //    return BadRequest();
 
             try
             {
@@ -106,7 +114,7 @@ namespace Instabrand.Controllers
         /// <param name="id">Instapost id</param>
         /// <response code="200">Successfully</response>
         /// <response code="400">Instapage is not enabled</response>
-        /// <response code="404">Image for this instapage not found</response>
+        /// <response code="404">Instapage or image for this instapage not found</response>
         /// <response code="422">Image has unprocessable extension</response>
         [HttpGet("/instapages/{login}/images")]
         [ProducesResponseType(200)]
@@ -121,8 +129,12 @@ namespace Instabrand.Controllers
             [FromServices] Domain.IFileStorage fileStorage)
         {
             var instapage = await instapageRepository.GetByInstagram(login, cancellationToken);
-            if (instapage.State != Domain.Instapage.InstapageState.Enabled)
-                return BadRequest();
+            if (instapage == null)
+                return NotFound();
+
+            // Feature Work In Progress [WIP]
+            //if (instapage.State != Domain.Instapage.InstapageState.Enabled)
+            //    return BadRequest();
 
             try
             {
@@ -147,6 +159,13 @@ namespace Instabrand.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Instapage
+        /// </summary>
+        /// <param name="login">Instagram login</param>
+        /// <response code="200">Successful</response>
+        /// <response code="400">Instapage is not enabled</response>
+        /// <response code="400">Instapage not found</response>
         [HttpGet("/instapages/{login}")]
         [ProducesResponseType(typeof(InstapageView), 200)]
         [ProducesResponseType(400)]
@@ -161,8 +180,9 @@ namespace Instabrand.Controllers
             if (instapage == null)
                 return NotFound();
 
-            if (instapage.State != InstapageState.Enabled)
-                return BadRequest();
+            // Feature Work In Progress [WIP]
+            //if (instapage.State != InstapageState.Enabled)
+            //    return BadRequest();
 
             return Ok(instapage);
         }
