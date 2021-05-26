@@ -74,6 +74,11 @@ namespace Instabrand.Models.InstapagesConstructor
             RuleFor(o => o.Description)
                 .NotEmpty();
 
+            RuleFor(o => o.Vkontakte)
+                .MaximumLength(1024);
+            RuleFor(o => o.Telegram)
+                .MaximumLength(1024);
+
             RuleForEach(o => o.Posts)
                 .ChildRules(post =>
                 {

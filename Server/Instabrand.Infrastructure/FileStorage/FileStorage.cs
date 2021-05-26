@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,16 +17,34 @@ namespace Instabrand.Infrastructure.FileStorage
             _filePath = options.Value.FilePath;
         }
 
-        public Stream Get(string filename)
+        public (Stream stream, string extension) GetFile(string filename, string instagramLogin)
         {
-            var filePath = Path.Combine(_filePath, filename);
+            var filePath = Path.Combine(_filePath, instagramLogin, filename);
 
             if (!File.Exists(filePath))
                 throw new InvalidOperationException("File does not exists");
 
             var fs = new FileStream(filePath, FileMode.Open);
 
-            return fs;
+            return (fs, Path.GetExtension(filePath));
+        }
+
+        public (Stream stream, string extension) GetFileWithoutExtension(string filename, string instagramLogin)
+        {
+            var directoryPath = Path.Combine(_filePath, instagramLogin);
+
+            if (!Directory.Exists(directoryPath))
+                throw new InvalidOperationException("File does not exists");
+
+            var filePath = Directory.GetFiles(directoryPath, $"{filename}.*")
+                .FirstOrDefault();
+
+            if (filePath == null || !File.Exists(filePath))
+                throw new InvalidOperationException("File does not exists");
+
+            var fs = new FileStream(filePath, FileMode.Open);
+
+            return (fs, Path.GetExtension(filePath));
         }
 
         public async Task Save(string filename, string instagramLogin, Stream stream, CancellationToken cancellationToken)

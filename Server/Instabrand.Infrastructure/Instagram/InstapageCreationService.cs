@@ -57,12 +57,12 @@ namespace Instabrand.Infrastructure.Instagram
 
         public async Task UploadBackground(string extension, Stream stream, string instagramLogin, CancellationToken cancellationToken)
         {
-            await _fileStorage.Save($"background.{extension}", instagramLogin, stream, cancellationToken);
+            await _fileStorage.Save($"background{extension}", instagramLogin, stream, cancellationToken);
         }
 
         public async Task UploadFavicon(string extension, Stream stream, string instagramLogin, CancellationToken cancellationToken)
         {
-            await _fileStorage.Save($"favicon.{extension}", instagramLogin, stream, cancellationToken);
+            await _fileStorage.Save($"favicon{extension}", instagramLogin, stream, cancellationToken);
         }
     }
 }
