@@ -109,7 +109,7 @@ namespace Instabrand.Controllers
         /// <response code="404">Image for this instapage not found</response>
         /// <response code="422">Image has unprocessable extension</response>
         [HttpGet("/instapages/{login}/images")]
-        [ProducesResponseType(typeof(InstapageView), 200)]
+        [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(422)]
@@ -148,7 +148,7 @@ namespace Instabrand.Controllers
         }
 
         [HttpGet("/instapages/{login}")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(InstapageView), 200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetInstapage(
