@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next build && next start -p 80"
+    "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "bootstrap": "^5.0.0-beta2",
     "bootstrap-icons": "^1.4.1",
     "dotenv": "^8.2.0",
@@ -16,6 +17,7 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "next": "10.0.8",
+    "next-images": "^1.7.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "reactjs-localizer": "^0.1.61",

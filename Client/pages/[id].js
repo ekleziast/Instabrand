@@ -1,49 +1,31 @@
-import NotFound from 'pages/404';
+import PropTypes from 'prop-types';
+
 import SiteLayout from 'layouts/SiteLayout';
 import Fetch from 'classes/Fetch';
-import PropTypes from 'prop-types';
+import Values from 'classes/Values';
 
 Site.propTypes = {
     details: PropTypes.object,
-    posts: PropTypes.array
 };
 
-export default function Site({ details, posts }) {
-    if (!details) {
-        return <NotFound/>;
-    }
-
-    return (
-        <SiteLayout
-            details={details}
-            posts={posts}
-        />
-    );
+export default function Site({ details }) {
+    return <SiteLayout details={details}/>;
 }
 
 export async function getServerSideProps({ query }) {
-    const url = `/api/v1/websites/${query.id}`;
-    const details = new Fetch(`${url}/details`);
-    const posts = new Fetch(`${url}/posts`);
+    const fetch = new Fetch(`/api/v1/instapages/${query.id}`);
 
     try {
-        const res = await Promise.all([
-            details.request(true),
-            posts.request(true)
-        ]);
+        const { json } = await fetch.request(true);
 
         return {
             props: {
-                details: res[0].json,
-                posts: res[1].json
+                details: json,
             }
         };
-    } catch {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            }
-        };
+    } catch(err) {
+        console.error(err);
+
+        return Values.serverRedirect('/404');
     }
 }
