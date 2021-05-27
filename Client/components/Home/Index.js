@@ -7,7 +7,7 @@ import AuthModal from 'components/AuthModal/Modal';
 import { useHomeContext } from 'context/home';
 import Button from 'components/Button';
 import { useUserContext } from 'context/user';
-import Pricing from './Pricing';
+import Pricing from './Pricing/index';
 import laptop from './images/laptop.png';
 import laptop_bg from './images/laptop_bg.png';
 
