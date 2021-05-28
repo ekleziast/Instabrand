@@ -2,12 +2,11 @@ import Link from 'next/link';
 import { useLocalizer } from 'reactjs-localizer';
 import { Fragment, useEffect, useState } from 'react';
 
-import useModal from 'hooks/useModal';
 import AuthModal from 'components/AuthModal/Modal';
 import { useHomeContext } from 'context/home';
 import Button from 'components/Button';
 import { useUserContext } from 'context/user';
-import Pricing from './Pricing/index';
+import Pricing from './Pricing';
 import laptop from './images/laptop.png';
 import laptop_bg from './images/laptop_bg.png';
 
@@ -16,8 +15,7 @@ export default function Home() {
     const [dropMenu, setDropMenu] = useState(false);
 
     const { localize } = useLocalizer();
-    const authModal = useModal();
-    const { setAuthForm } = useHomeContext();
+    const { setAuthForm, authModal } = useHomeContext();
     const { user } = useUserContext();
 
     const openAuthModal = (type) => {
@@ -135,7 +133,7 @@ export default function Home() {
                     <h1 className='home-pricing__title'>
                         Создайте отличный сайт за считанные минуты
                     </h1>
-                    <Pricing />
+                    <Pricing/>
                 </section>
             </main>
 

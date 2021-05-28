@@ -1,5 +1,5 @@
 import { HomeProvider } from 'context/home';
-import Home from 'components/Home/index';
+import Home from 'components/Home';
 import authMiddleware from 'middlewares/auth';
 import Values from 'classes/Values';
 
