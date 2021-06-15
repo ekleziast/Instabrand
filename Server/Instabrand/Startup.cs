@@ -165,7 +165,7 @@ namespace Instabrand
 
             #region QueryHandlers
 
-            services.AddQueryProcessor<Queries.Infrastructure.Samples.SampleQueryHandler>();
+            services.AddQueryProcessor<Queries.Infrastructure.Users.UserDetailsQueryHandler>();
 
             services.AddNpgsqlDbContextPool<Queries.Infrastructure.Users.UsersDbContext>(npgsqlConnectionString);
             services.AddNpgsqlDbContextPool<Queries.Infrastructure.Instapages.InstapagesDbContext>(npgsqlConnectionString);
